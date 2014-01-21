@@ -1,0 +1,21 @@
+(defun pos+recursion (lst)
+	(let ((len (length lst)))
+		(defun pos+ (lst)
+			(if (null lst)
+				nil
+				(cons (+ (car lst) 
+								 (- len (length lst)))
+							(pos+ (cdr lst)))))
+		(pos+ lst)))
+
+(defun pos+iteration (lst)
+	(let ((n 0)
+				(ret))
+		(dolist (elt lst)
+			(setf ret (append ret (list (+ n elt))))
+			(setf n (+ n 1)))
+		ret))
+
+(defun pos+mapcar (lst)
+	(let ((n -1))
+		(mapcar #'(lambda (e) (setf n (+ n 1)) (+ e n)) lst)))

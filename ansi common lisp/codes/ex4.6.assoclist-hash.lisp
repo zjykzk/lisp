@@ -1,0 +1,12 @@
+(defun assoclist2hash (alist)
+	(let ((ht (make-hash-table :size (length alist))))
+		(dolist (e alist)
+			(format t "~A = ~A~%" (car e) (cdr e))
+			(setf (gethash (car e) ht) (cdr e)))
+		ht))
+
+(defun hash2assoclist (hash)
+	(let ((al))
+		(maphash #'(lambda (k v) (append al (list (cons k v))))
+						 hash)
+		al))

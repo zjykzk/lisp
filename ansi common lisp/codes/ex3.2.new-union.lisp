@@ -1,0 +1,10 @@
+(defun new-union1 (alst blst)
+	(if (or (null alst) (null blst))
+		(or alst blst)
+		(let ((b (car blst)))
+			(if (member b alst)
+				(new-union1 alst (cdr blst))
+				(append (new-union1 alst (cdr blst)) (list b))))))
+
+(defun new-union (alst blst)
+	(new-union1 alst (reverse blst)))
